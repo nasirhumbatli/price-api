@@ -6,9 +6,15 @@ use App\Models\MongoDB\VehicleType;
 
 class TransportPriceService
 {
-    public static function calculatePriceForVehicleType(array $cities): array
+    protected DirectionsApiInterface $directionsService;
+
+    public function __construct(DirectionsApiInterface $directionsService)
     {
-        $totalDistance = GoogleDirectionsApi::getTotalDistance($cities);
+        $this->directionsService = $directionsService;
+    }
+    public function calculatePriceForVehicleType(array $cities): array
+    {
+        $totalDistance = $this->directionsService->getTotalDistance($cities);
         $vehicleTypes = VehicleType::all();
         $vehicle_types_and_price_list = [];
 

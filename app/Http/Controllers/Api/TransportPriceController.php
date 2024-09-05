@@ -10,9 +10,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TransportPriceController extends Controller
 {
-    public function getVehicleTypeAndPriceList(AddressesRequest $request): JsonResource
+    public function getVehicleTypeAndPriceList(AddressesRequest $request, TransportPriceService $service): JsonResource
     {
-       $list = TransportPriceService::calculatePriceForVehicleType($request->validated('addresses.*.city'));
+       $list = $service->calculatePriceForVehicleType($request->validated('addresses.*.city'));
 
        return new TransportPriceCollection($list);
     }

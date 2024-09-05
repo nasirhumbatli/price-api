@@ -2,11 +2,12 @@
 
 namespace App\Services;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 
-class GoogleDirectionsApi
+class GoogleDirectionsApi implements DirectionsApiInterface
 {
-    private static function getDistance(string $origin, string $destination, string $waypoints)
+    public function getDistance(string $origin, string $destination, string $waypoints): \Illuminate\Http\Client\Response
     {
         $response = Http::get(config('services.google_directions_api.url'), [
             'origin' => $origin,
@@ -19,10 +20,10 @@ class GoogleDirectionsApi
             throw new \Exception("Error: {$response['status']}");
         }
 
-        return $response->json();
+        return $response;
     }
 
-    public static function getTotalDistance($cities)
+    public function getTotalDistance($cities): float
     {
         $origin = $cities[0];
         $countCities = count($cities);
@@ -37,18 +38,5 @@ class GoogleDirectionsApi
         }
 
         return $totalDistance / 1000;
-    }
-
-    public static function getDistanceWithOriginAndDestination(array $cities): array
-    {
-        $destinations = [];
-        for ($i = 0; $i < count($cities) - 1; $i++) {
-            $destinations[] = [
-                'origin' => $cities[$i],
-                'destination' => $cities[$i + 1],
-                'distance' => $distance = self::getDistance($cities[$i], $cities[$i + 1]),
-            ];
-        }
-        return $destinations;
     }
 }
