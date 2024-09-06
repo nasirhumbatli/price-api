@@ -4,7 +4,7 @@
 
 2 - touch database/database.sqlite
 
-3 - create .env. file
+3 - create .env file
 
 4 - php artisan key:generate
 
