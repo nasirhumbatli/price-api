@@ -10,7 +10,6 @@
 
  - MONGODB_URI=
  - MONGODB_DB_NAME=
- - GOOGLE_DIRECTIONS_API_URL=
  - GOOGLE_DIRECTIONS_API_KEY=
 
 5 - php artisan migrate --seed
