@@ -2,19 +2,17 @@
 
 1 - composer install
 
-2 - touch database/database.sqlite
+2 - create .env file
 
-3 - create .env file
+3 - php artisan key:generate
 
-4 - php artisan key:generate
-
-5 - fill curtain fields below:
+4 - fill curtain fields below:
 
  - MONGODB_URI=
  - MONGODB_DB_NAME=
  - GOOGLE_DIRECTIONS_API_URL=
  - GOOGLE_DIRECTIONS_API_KEY=
 
-6 - php artisan migrate --seed
+5 - php artisan migrate --seed
 
-7 - php artisan test
+6 - php artisan test
