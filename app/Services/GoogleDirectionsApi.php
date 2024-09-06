@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class GoogleDirectionsApi implements DirectionsApiInterface
 {
-    public function getDistance(string $origin, string $destination, string $waypoints): \Illuminate\Http\Client\Response
+    public function getDistance(string $origin, string $destination, string $waypoints = ""): \Illuminate\Http\Client\Response
     {
         $response = Http::get(config('services.google_directions_api.url'), [
             'origin' => $origin,
